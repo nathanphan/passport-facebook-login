@@ -21,7 +21,7 @@ trait FacebookLoginTrait
             /**
              * Check if the 'fb_token' as passed.
              */
-            if ($request->get('fb_token')) {
+            if ($fbToken = $request->get('fb_token')) {
 
                 /**
                  * Initialise Facebook SDK.
@@ -31,7 +31,7 @@ trait FacebookLoginTrait
                     'app_secret' => config('facebook.app.secret'),
                     'default_graph_version' => 'v2.5',
                 ]);
-                $fb->setDefaultAccessToken($request->get('fb_token'));
+                $fb->setDefaultAccessToken($fbToken);
 
                 /**
                  * Make the Facebook request.
@@ -73,7 +73,7 @@ trait FacebookLoginTrait
 
                     $user->{$email_column}    = $fbUser['email'];
                     $user->{$password_column} = bcrypt(uniqid('fb_', true)); // Random password.
-                    $user->{$fb_token}        = $fbUser['token'];
+                    $user->{$fb_token}        = $fbToken;
                     $user->save();
 
                     /**
