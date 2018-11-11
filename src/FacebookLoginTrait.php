@@ -29,7 +29,7 @@ trait FacebookLoginTrait
                 $fb = new Facebook([
                     'app_id' => config('facebook.app.id'),
                     'app_secret' => config('facebook.app.secret'),
-                    'default_graph_version' => 'v2.5',
+                    'default_graph_version' => config('facebook.app.default_graph_version'),
                 ]);
                 $fb->setDefaultAccessToken($fbToken);
 

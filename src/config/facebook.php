@@ -13,6 +13,7 @@ return [
     'app' => [
         'id' => env('FACEBOOK_APP_ID'),
         'secret' => env('FACEBOOK_APP_SECRET'),
+        'default_graph_version' => 'v2.5',
     ],
 
     /*
