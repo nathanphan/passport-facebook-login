@@ -53,6 +53,7 @@ trait FacebookLoginTrait
                 $last_name_column   = config('facebook.registration.last_name', 'last_name');
                 $email_column       = config('facebook.registration.email', 'email');
                 $password_column    = config('facebook.registration.password', 'password');
+                $fb_token           = config('facebook.registration.fb_token', 'fb_token');
 
                 $user = $userModel::where($facebook_id_column, $fbUser['id'])->first();
 
@@ -72,6 +73,7 @@ trait FacebookLoginTrait
 
                     $user->{$email_column}    = $fbUser['email'];
                     $user->{$password_column} = bcrypt(uniqid('fb_', true)); // Random password.
+                    $user->{$fb_token}        = $fbUser['token'];
                     $user->save();
 
                     /**
